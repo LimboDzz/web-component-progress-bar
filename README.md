@@ -3,6 +3,7 @@
 - [!TODOS](#todos)
 - [New a local git repo and push to remote](#new-a-local-git-repo-and-push-to-remote)
 - [Create internal anchors in markdown](#create-internal-anchors-in-markdown)
+- [Vanilla-two-way-data-binding](#vanilla-two-way-data-binding)
 
 ## New a local git repo and push to remote
 
@@ -84,5 +85,51 @@ It fixed after I created a few new files to add and commit.
 ```
 
 ## Web Components
+
+### Basic start
+
+```js
+class ProgressBar extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+// kebab-case tagname is a must
+customElements.define('progress-bar', ProgressBar);
+```
+
+### Shadow DOM to encapsulate
+
+```js
+// create shadowDOM in open mode
+this.attachShadow({ mode: 'open' });
+// manipulate shaodowDOM through shadowRoot the way you would do to document.body
+this.shadowRoot.appendChild();
+```
+
+- mode:'open' give an entry to shadowDOM through the shadowRoot attr.
+- mode:'closed' limit entry point to what attachShadow returns.
+
+### CSS Tips inside shadowDOM
+
+- :host - selects the shadow host of the shadow DOM containing the CSS
+  :host defaults to inline
+
+## Vanilla two-way data binding
+
+```js
+const inputProgress = document.querySelector('#input-progress');
+const inputProgressModel = {};
+Object.defineProperties(inputProgressModel, {
+  progress: {
+    get() {
+      return inputProgress.value;
+    },
+    set(newValue) {
+      inputProgress.value = newValue;
+    },
+  },
+});
+```
 
 ## TODOS

@@ -7,10 +7,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
     </head>
-    <progress-bar></progress-bar>
+    <progress-bar progress="65"></progress-bar>
+    <input type="number" name="progress" id="input-progress" max="100" min="0">
 
     <body>
-        <script src="./ProgressBar.js"></script>
+        <script src="./ProgressBar.js" type="module"></script>
+        <script>
+            const inputProgress = document.querySelector("#input-progress")
+            const progressBar = document.querySelector("progress-bar")
+            const model = {}
+            Object.defineProperties(model, {
+                "progress": {
+                    get() { return inputProgress.value },
+                    set(newValue) {
+                        inputProgress.value = newValue
+                    }
+                }
+            })
+            inputProgress.addEventListener('change', function () {
+                progressBar.progress = this.value
+            })
+        </script>
     </body>
 
 </html>
